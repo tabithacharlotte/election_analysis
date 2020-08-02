@@ -33,9 +33,9 @@ with open(file_to_load, 'r') as election_data:
         #add votes to candidate counts
         candidate_votes[candidate_name] += 1
         
-print(total_votes)
-print(candidate_votes.keys())
-print(candidate_votes)
+# print(total_votes)
+# print(candidate_votes.keys())
+# print(candidate_votes)
 
 winning_vote_count = 0
 winner = 'no one'
@@ -44,16 +44,16 @@ winning_vote_percentage = 0
 #need to get percentage of votes for each candidate
 for name, vote_count in candidate_votes.items():
     vote_percentage = vote_count / total_votes * 100
-    print(f'{name}: {vote_percentage:.1f}% ({vote_count:,})\n')
+    #print(f'{name}: {vote_percentage:.1f}% ({vote_count:,})\n')
 
     if vote_count > winning_vote_count:
         winning_vote_count = vote_count
         winning_vote_percentage = vote_percentage
         winner = name
-print((
-    f'{winner} is the winner with {winning_vote_count} total'
-    f' votes and {winning_vote_percentage:.1f}% of the votes.'
-))
+# print((
+#     f'{winner} is the winner with {winning_vote_count} total'
+#     f' votes and {winning_vote_percentage:.1f}% of the votes.'
+# ))
 
 winning_candidate_summary = (
     f"-------------------------\n"
@@ -61,11 +61,19 @@ winning_candidate_summary = (
     f"Winning Vote Count: {winning_vote_count:,}\n"
     f"Winning Percentage: {winning_vote_percentage:.1f}%\n"
     f"-------------------------\n")
-print(winning_candidate_summary)
+# print(winning_candidate_summary)
 
 #create a filename variable to a direct or indirect path to the file
-file_to_save = Path().cwd() / 'analysis' / 'election_analysis.txt'
+file_to_save = Path().cwd() / 'analysis' / 'election_results.txt'
 #using the with statement open file as a text file
-with open(file_to_save, 'w') as outfile:
+with open(file_to_save, 'w') as text_file:
     #write three counties
-    outfile.write("Counties in the Election\n------------------------\nArapahoe\nDenver\nJefferson")
+    text_file.write((
+        'Election Results\n'
+        '-------------------------\n'
+        f'Total Votes: {total_votes:,}\n'
+        '-------------------------\n'))
+    for name, vote_count in candidate_votes.items():
+        vote_percentage = vote_count / total_votes * 100
+        text_file.write(f'{name}: {vote_percentage:.1f}% ({vote_count:,})\n')
+    text_file.write(winning_candidate_summary)
