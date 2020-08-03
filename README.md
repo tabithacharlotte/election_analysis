@@ -16,7 +16,7 @@ A Colorado Board of Elections employee gave me the following tasks to complete t
 - Data Source: election_results.csv
 - Software: Python 3.7.6, Visual Studio Code, 1.47.3
   
-## Initial Results
+## Results
 The analysis of the election results show that:
 - There were 369,711 votes cast in the election.
   
