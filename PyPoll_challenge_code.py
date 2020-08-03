@@ -16,6 +16,8 @@ from pathlib import Path
 #assign variable for the file to load and the path for it and the file to save
 file_to_load = Path().cwd() / 'resources' / 'election_results.csv'
 file_to_save = Path().cwd() / 'analysis' / 'election_results_challenge.txt'
+CANDIDATE_NAME_COL = 2
+COUNTY_NAME_COL = 1
 
 #create and set up total_votes
 total_votes = 0
@@ -34,14 +36,14 @@ with open(file_to_load, 'r') as election_data:
 
     for row in file_reader:
         total_votes += 1
-        candidate_name = row[2]
+        candidate_name = row[CANDIDATE_NAME_COL]
         #add unique candidate's name to the list with append
         if candidate_name not in candidate_votes:
             candidate_votes[candidate_name] = 0
         #add votes to candidate counts
         candidate_votes[candidate_name] += 1
         
-        county_name = row[1]
+        county_name = row[COUNTY_NAME_COL]
         if county_name not in county_votes:
             county_votes[county_name] = 0
         county_votes[county_name] += 1
@@ -71,7 +73,6 @@ for name, vote_count in county_votes.items():
         winning_county_vote_count = vote_count
         winning_county_vote_percentage = vote_percentage
         winning_county_name = name
-
 
 part3_output = (
     "-------------------------\n"
